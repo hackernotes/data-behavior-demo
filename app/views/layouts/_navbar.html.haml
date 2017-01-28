@@ -1,0 +1,22 @@
+%nav.navbar.navbar-inverse.main-nav
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#main-nav-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+
+    #main-nav-collapse.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        - @products.each_with_index do |product, index|
+          %li{class: ('active' if params[:id].try(:to_i) == product.id)}
+            = link_to "Product #{index + 1}", product
+
+      %ul.nav.navbar-nav.navbar-right
+        %li#cart-dropdown.dropdown
+          %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+            %i.fa.fa-shopping-cart
+          %ul.dropdown-menu.cart-dropdown-menu              
+            %li
+              = render 'orders/cart'

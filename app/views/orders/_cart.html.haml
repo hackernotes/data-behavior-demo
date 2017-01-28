@@ -1,0 +1,13 @@
+- cache current_order do
+  #cart.cart
+    .loading-overlay
+    %ul.list-unstyled.line-items
+      - current_order.line_items.each do |line_item|
+        = render line_item
+    %ul.list-unstyled.totals
+      %li.total-row
+        .row
+          .col-md-6.text-left
+            %strong Total:
+          .col-md-6.text-right
+            = number_to_currency current_order.total

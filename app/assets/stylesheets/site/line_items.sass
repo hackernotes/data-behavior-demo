@@ -1,0 +1,54 @@
+.cart-dropdown-menu
+  padding: 0
+  overflow: hidden
+
+.cart
+  min-width: 312px
+
+  & > ul > li
+    padding: 8px 12px
+
+  .line-item
+    .thumb-col
+      img
+        width: 100%
+    .info-col
+      padding: 4px 15px 0 0
+
+      .remove-line-item-link
+        position: absolute
+        z-index: 1
+        top: 0
+        right: 20px
+        color: #616161
+        font-size: 15px
+
+      .name-row, .quantiy-row
+        margin-bottom: 4px
+      
+      .name-row
+        font-weight: 500
+
+      .quantity-link, .quantity
+        display: inline-block
+
+      .quantity-link
+        text-align: center
+        background: #f5f5f5
+        border-radius: 12px
+        width: 20px
+        height: 20px
+        line-height: 19px
+        color: #616161
+        font-weight: 400
+
+        &:hover, &:visited, &:focus
+          &, &:hover
+            text-decoration: none
+
+      .quantity
+        min-width: 26px
+        text-align: center
+
+      .total
+        margin-top: 8px

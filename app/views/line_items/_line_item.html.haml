@@ -1,0 +1,25 @@
+%li.line-item[line_item]
+  .row
+    .col-md-3.thumb-col
+      = image_tag line_item.product.image.url(:thumb)
+    .col-md-9.info-col
+      = link_to line_item_path(line_item), class: 'remove-line-item-link', data: {remote: true, method: :delete, behavior: 'cart-loading'} do
+        &times;
+      .name-row= line_item.variant.full_name
+      .row.quantity-row
+        .col-md-7
+          - if line_item.quantity == 1
+            %span.quantity-link.placeholder &nbsp;
+          - else
+            = link_to line_item_path(line_item, line_item: {quantity: line_item.quantity - 1}), class: 'quantity-link', data: {remote: true, method: :patch, behavior: 'cart-loading'} do
+              = "-"
+          .quantity= line_item.quantity
+          = link_to line_item_path(line_item, line_item: {quantity: line_item.quantity + 1}), class: 'quantity-link', data: {remote: true, method: :patch, behavior: 'cart-loading'} do
+            = "+"
+
+        .col-md-5.text-right
+          .line-item-price
+            - if line_item.quantity > 1
+              = "#{line_item.quantity} x #{number_to_currency line_item.price}"
+            - else
+              = number_to_currency line_item.price

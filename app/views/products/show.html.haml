@@ -1,0 +1,25 @@
+- cache @product do
+  .row
+    .col-md-4
+      .product-image-container
+        = image_tag @product.image.url(:med)
+    .col-md-8
+      %h1= @product.name
+      %p.description= @product.description
+
+      = form_for LineItem.new(variant: @product.variants.first), remote: true, authenticity_token: false, class: 'purchase-form', data: {behavior: 'cart-loading'} do |f|
+        - if @product.variants.size == 1
+          = f.hidden_field :variant_id
+        - else
+          .btn-group.variant-selection{data: {toggle: 'buttons'}}
+            - @product.variants.each do |variant|
+              %label.btn.btn-default{class: ('active' if variant == f.object.variant)}
+                = variant.name
+                = f.radio_button :variant_id, variant.id, checked: (f.object.variant == variant), class: 'hidden', id: nil
+        
+        .clearfix
+        = f.button type: "submit", class: "btn btn-success add-to-cart-button", data: {disable_with: "Adding"} do
+          %i.fa.fa-shopping-cart
+          Add To Cart
+
+  .clearfix
